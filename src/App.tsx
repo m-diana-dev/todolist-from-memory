@@ -19,22 +19,11 @@ function App() {
         setTasks(tasks.filter(el => el.id !== id));
     }
 
-    let [tasksAfterFilter, setTasksAfterFilter] = useState('All');
 
-    const FilteredTasks = (filterString: FilterBtn) => {
-        setTasksAfterFilter(filterString);
-    }
-
-    let filteredTasks =  tasks;
-    if(tasksAfterFilter === 'Active'){
-        filteredTasks = tasks.filter(el=>!el.isDone);
-    } else if (tasksAfterFilter === 'Completed'){
-        filteredTasks = tasks.filter(el=>el.isDone);
-    }
 
     return (
         <div className="App">
-            <Todolist title="What to learn" tasks={filteredTasks} RemoveTask={RemoveTask} FilteredTasks={FilteredTasks}/>
+            <Todolist title="What to learn" tasks={tasks} RemoveTask={RemoveTask}/>
         </div>
     );
 }

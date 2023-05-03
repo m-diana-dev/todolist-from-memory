@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FilterBtn} from "./App";
 
 type TaskType = {
@@ -11,10 +11,26 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     RemoveTask: (id: number)=>void
-    FilteredTasks:(filterString: FilterBtn)=>void
 }
 
 export function Todolist(props: PropsType) {
+
+
+    let [tasksAfterFilter, setTasksAfterFilter] = useState('All');
+    const FilteredTasks = (filterString: FilterBtn) => {
+        setTasksAfterFilter(filterString);
+    }
+
+    const filteredTasksBox = () =>{
+        let filteredTasks =  props.tasks;
+        if(tasksAfterFilter === 'Active'){
+            filteredTasks = props.tasks.filter(el=>!el.isDone);
+        } else if (tasksAfterFilter === 'Completed'){
+            filteredTasks = props.tasks.filter(el=>el.isDone);
+        }
+        return filteredTasks;
+    }
+
     return <div>
         <h3>{props.title}</h3>
         <div>
@@ -22,7 +38,7 @@ export function Todolist(props: PropsType) {
             <button>+</button>
         </div>
         <ul>
-            {props.tasks.map((el)=>{
+            {filteredTasksBox().map((el)=>{
                 return(
                     <li key={el.id}>
                         <input type="checkbox" checked={el.isDone}/>
@@ -33,9 +49,9 @@ export function Todolist(props: PropsType) {
             })}
         </ul>
         <div>
-            <button onClick={()=>props.FilteredTasks('All')}>All</button>
-            <button onClick={()=>props.FilteredTasks('Active')}>Active</button>
-            <button onClick={()=>props.FilteredTasks('Completed')}>Completed</button>
+            <button onClick={()=>FilteredTasks('All')}>All</button>
+            <button onClick={()=>FilteredTasks('Active')}>Active</button>
+            <button onClick={()=>FilteredTasks('Completed')}>Completed</button>
         </div>
     </div>
 }
