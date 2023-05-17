@@ -3,15 +3,15 @@ import React from 'react';
 type ButtonPropsType = {
     name: string
     callback: ()=>void
+    className?: string
 }
 
-export const Button = (props:ButtonPropsType) => {
 
-    const onclickHandler =()=>{
+export const Button = (props: ButtonPropsType) => {
+    const onClickHandler = () => {
         props.callback();
     }
-
     return (
-        <button onClick={onclickHandler}>{props.name}</button>
+        <button className={props.className} onClick={onClickHandler}>{props.name}</button>
     );
 };
