@@ -12,15 +12,15 @@
   border: red 1px solid;
 }
 
-.errorMessage {
+.error-message {
   color: red;
 }
 
-.activeFilter {
+.active-filter {
   background-color: aquamarine;
 }
 
-.isDone {
+.is-done {
   opacity: 0.5;
 }
 
