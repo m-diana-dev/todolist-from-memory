@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
 import {v1} from "uuid";
-import {TodoList} from "./TodoList";
-import {AddItemForm} from "./components/AddItemForm";
+import {TodoList} from "./components/TodoList/TodoList";
+import {AddItemForm} from "./components/AddItemForm/AddItemForm";
+import {Header} from "./components/Header/Header";
 
 export type FilterType = 'all' | 'active' | 'completed';
 
@@ -56,11 +57,11 @@ function App() {
     }
 
     const ChangeTaskTitle = (idTodoList: string, idTask: string, title: string) => {
-        setTasks({...tasks, [idTodoList]: tasks[idTodoList].map(el=>el.id===idTask ? {...el, title} : el)})
+        setTasks({...tasks, [idTodoList]: tasks[idTodoList].map(el => el.id === idTask ? {...el, title} : el)})
     }
 
     const ChangeTodoListTitle = (idTodoList: string, title: string) => {
-        setTodoLists(todoLists.map(el=>el.id===idTodoList ? {...el, title} : el))
+        setTodoLists(todoLists.map(el => el.id === idTodoList ? {...el, title} : el))
     }
     const addTask = (idTodoList: string, title: string) => {
         setTasks({...tasks, [idTodoList]: [{id: v1(), title, isDone: false}, ...tasks[idTodoList]]})
@@ -101,8 +102,18 @@ function App() {
 
     return (
         <div className="App">
-            <AddItemForm addTitle={addTodoList}/>
-            {todoListComponent}
+            <Header/>
+            <main className="main">
+                <div className="container">
+                    <div className="mainTop">
+                        <h2>Add a new task block!</h2>
+                        <AddItemForm addTitle={addTodoList}/>
+                    </div>
+                    <div className="mainItems">
+                        {todoListComponent}
+                    </div>
+                </div>
+            </main>
         </div>
     );
 }

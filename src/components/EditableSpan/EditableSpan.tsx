@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
+import s from "./EditableSpan.module.css";
 
 type EditableSpanPropsType = {
     title: string
@@ -17,9 +18,10 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
         setInputTitle(e.currentTarget.value)
     }
+    const inputStyle = 'input' + ' ' + s.inputWidth;
     return (
         modeInput
-            ? <input autoFocus onBlur={onBlurHandler} value={inputTitle} onChange={onChangeHandler}/>
-            : <span onDoubleClick={onDoubleClickHandler}>{props.title}</span>
+            ? <input className={inputStyle} autoFocus onBlur={onBlurHandler} value={inputTitle} onChange={onChangeHandler}/>
+            : <span className={s.inputWidth} onDoubleClick={onDoubleClickHandler}>{props.title}</span>
     );
 };

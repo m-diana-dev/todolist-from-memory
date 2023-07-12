@@ -1,5 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from "./Button";
+import {Button} from "../Button/Button";
+import add from "../../image/add.svg";
+import s from './AddItemForm.module.css'
 
 
 type AddItemFormPropsType = {
@@ -14,7 +16,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter'){
+        if (e.key === 'Enter') {
             OnAddTitleHandler();
         }
     }
@@ -26,11 +28,16 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             setError('Error');
         }
     }
+
+    const inputStyle = 'input' + ' ' + (error ? 'errorInput' : '') + ' ' + s.inputWidth;
     return (
-        <div>
-            <input className={error ? 'error' : undefined} type="text" onChange={OnChangeInputHandler} onKeyDown={onKeyDownHandler}
+        <div className={s.AddItemForm}>
+            <input className={inputStyle} type="text" onChange={OnChangeInputHandler}
+                   onKeyDown={onKeyDownHandler}
                    value={inputTitle}/>
-            <Button name={'+'} callback={OnAddTitleHandler}/>
+            <Button callback={OnAddTitleHandler} round={true}>
+                <img src={add} alt="icon"/>
+            </Button>
             {error && <div className='errorMessage'>{error}</div>}
         </div>
     );
