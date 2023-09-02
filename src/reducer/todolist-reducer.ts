@@ -38,7 +38,24 @@ type ActionType = DeleteTodolistActionType
     | AddTaskActionType
     | ChangeTaskTitleActionType
     | ChangeTaskStatusActionType
-export const todolistsReducer = (state: TodoListsType[], action: ActionType) => {
+
+const initialState: TodoListsType[] = [
+    {
+        id: v1(), title: 'What to learn', filter: 'all', tasks: [
+            {id: v1(), title: "HTML&CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "ReactJS", isDone: false},
+            {id: v1(), title: "ReactJS2", isDone: false},
+        ]
+    },
+    {
+        id: v1(), title: 'What to buy', filter: 'all', tasks: [
+            {id: v1(), title: "Milk", isDone: true},
+            {id: v1(), title: "Water", isDone: true},
+        ]
+    },
+]
+export const todolistsReducer = (state: TodoListsType[] = initialState, action: ActionType): TodoListsType[] => {
     switch (action.type) {
         case 'DELETE-TODOLIST':
             return state.filter(todo => todo.id !== action.payload.id)

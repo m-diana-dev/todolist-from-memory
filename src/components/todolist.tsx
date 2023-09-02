@@ -60,7 +60,7 @@ export const Todolist: React.FC<TodolistPropsType> = (props) => {
             </h2>
             <AddComponent addNewItem={addTaskCallback}/>
             <ul>
-                {tasks.map(el => <li className={el.isDone ? 'isDone' : undefined}>
+                {tasks.map(el => <li key={el.id} className={el.isDone ? 'isDone' : undefined}>
                     <input type="checkbox" checked={el.isDone} onChange={(e)=>onChangeStatusHandler(el.id, e.currentTarget.checked)}/>
                     <EditableSpan title={el.title} changeTitle={(title: string)=>changeTaskTitleCallback(el.id, title)}/>
                     <Button name={'-'} callback={()=>onDeleteTaskHandler(el.id)}/>
